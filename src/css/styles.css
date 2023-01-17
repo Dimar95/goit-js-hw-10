@@ -18,3 +18,15 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+.country-list{
+
+}
+.country-li{
+display: flex;
+}
+.country-flag{
+
+}
+.country-name{
+
+}
