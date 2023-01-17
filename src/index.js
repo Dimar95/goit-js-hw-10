@@ -2,6 +2,7 @@ import './css/styles.css';
 import { fetchCountries } from "./js/fetchCountries";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import debounce from 'lodash.debounce';
+
 const DEBOUNCE_DELAY = 300;
 
 Notify.init({
@@ -50,7 +51,7 @@ function onMurkupCountries({flags, name}) {
 }
 
 function onMurkupCountrieInfo(arrayCountries) {
-    const countrie = arrayCountries.map(({name, flags, capital, population, languages}) => 
+    arrayCountries.map(({name, flags, capital, population, languages}) => 
         refs.countryInfo.innerHTML = `<p class="country-name">
         <img src="${flags.svg}" alt="${name.official}" width="60" height="40">
         <span><b>${name.official}</b></span></p>
