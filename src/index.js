@@ -50,10 +50,7 @@ function onMurkupCountries({flags, name}) {
 }
 
 function onMurkupCountrieInfo(arrayCountries) {
-    // const {name, flags, capital, population, languages} = arrayCountries;
-
-    const countrie = arrayCountries.map({flags, capital, population, languages, name} = oneCountrie => 
-        
+    const countrie = arrayCountries.map(({name, flags, capital, population, languages}) => 
         refs.countryInfo.innerHTML = `<p class="country-name">
         <img src="${flags.svg}" alt="${name.official}" width="60" height="40">
         <span><b>${name.official}</b></span></p>
@@ -69,18 +66,3 @@ function inpitClear() {
     refs.countryList.innerHTML = '';
     refs.countryInfo.innerHTML = '';
 }
-
-
-// function onMurkupCountrieInfo(arrayCountries) {
-//     const {}
-//     const countrie = arrayCountries.map(oneCountrie => 
-//         refs.countryInfo.innerHTML = `<p class="country-name">
-//         <img src="${oneCountrie.flags.svg}" alt="${oneCountrie.name.official}" width="60" height="40">
-//         <span><b>${oneCountrie.name.official}</b></span></p>
-//         <ul class="country-ul">
-//           <li class="country-ul"><b>Capital:</b><span>${oneCountrie.capital}</span></li>
-//           <li class="country-ul"><b>Population:</b><span>${oneCountrie.population}</span></li>
-//           <li class="country-ul"><b>Languages:</b><span>${Object.values(oneCountrie.languages)}</span></li>
-//         </ul>`);
-
-// }
