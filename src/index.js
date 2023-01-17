@@ -18,7 +18,6 @@ const refs = {
 
 refs.inputRef.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY))
 
-
 function onSearch(e) {
     let inputFilter = e.target.value.trim();
     if (inputFilter === '') {
