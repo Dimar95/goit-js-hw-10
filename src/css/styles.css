@@ -19,14 +19,14 @@ body {
   margin-bottom: 16px;
 }
 .country-list{
-
+padding: 0;
 }
 .country-li{
 display: flex;
+align-items: center;
 }
-.country-flag{
 
-}
 .country-name{
-
+  margin-left: 20px;
+  font-size: 20px;
 }
