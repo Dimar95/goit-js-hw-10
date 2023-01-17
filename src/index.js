@@ -3,7 +3,6 @@ import { fetchCountries } from "./js/fetchCountries";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import debounce from 'lodash.debounce';
 const DEBOUNCE_DELAY = 300;
-const inputRef = document.querySelector("#search-box")
 
 Notify.init({
     timeout: 2000,
@@ -11,59 +10,77 @@ Notify.init({
   });
 
 const refs = {
+    inputRef: document.querySelector("#search-box"),
     countryList: document.querySelector(".country-list"),
     countryInfo: document.querySelector(".country-info")
 }
 
+refs.inputRef.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY))
 
-// inputRef.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY))
-inputRef.addEventListener('input', onSearch)
 
 function onSearch(e) {
-    let inputFilter = e.currentTarget.value.trim();
+    let inputFilter = e.target.value.trim();
     if (inputFilter === '') {
-    refs.countryList.innerHTML = '';
+        inpitClear()
         return
     }
-    console.log(e.currentTarget.value);
     fetchCountries(inputFilter).then(onFilterCountries);
-    // onFilterCountries(arrayCountries)
-    
-
 }
 
 function onFilterCountries(arrayCountries) {
-    console.log(arrayCountries)
-    refs.countryList.innerHTML = '';
+    inpitClear()
     
     if (arrayCountries.length > 10) {
-        Notify.info(`❌ Too many matches found. Please enter a more specific name.`)
+        Notify.info(`Too many matches found. Please enter a more specific name.`)
     } else if (arrayCountries.length > 2 && arrayCountries.length <= 10) {
-        const array = arrayCountries.forEach((objectCountries) => {
+        arrayCountries.forEach((objectCountries) => {
             onMurkupCountries(objectCountries)
         })
+    } else if (arrayCountries.length === 1) {
+        onMurkupCountrieInfo(arrayCountries)
     } else{
-        onMurkupOneCountrie(arrayCountries)
+        Notify.failure(`❌ Oops, there is no country with that name`)
     }
 }
 
 function onMurkupCountries({flags, name}) {
-
-    refs.countryList.insertAdjacentHTML('beforeend', `<li class="country-li"><img src="${flags.svg}" alt="${name.official}" width="60" height="40"><span class="country-name">${name.official}</span></li>`)
+    refs.countryList.insertAdjacentHTML('beforeend', `<li class="countrys-li">
+    <img src="${flags.svg}" alt="${name.official}" width="60" height="40">
+    <span class="country-name">${name.official}</span></li>`)
 }
 
-function onMurkupOneCountrie(arrayCountries) {
-    const countrie = arrayCountries.map(oneCountrie => oneCountrie);
-    console.log(countrie)
+function onMurkupCountrieInfo(arrayCountries) {
+    // const {name, flags, capital, population, languages} = arrayCountries;
 
-    // console.log(flags, name, capital, population, languages)
-    
+    const countrie = arrayCountries.map({flags, capital, population, languages, name} = oneCountrie => 
+        
+        refs.countryInfo.innerHTML = `<p class="country-name">
+        <img src="${flags.svg}" alt="${name.official}" width="60" height="40">
+        <span><b>${name.official}</b></span></p>
+        <ul class="country-ul">
+          <li class="country-ul"><b>Capital:</b><span>${capital}</span></li>
+          <li class="country-ul"><b>Population:</b><span>${population}</span></li>
+          <li class="country-ul"><b>Languages:</b><span>${Object.values(languages)}</span></li>
+        </ul>`);
+
+}
+
+function inpitClear() {
+    refs.countryList.innerHTML = '';
+    refs.countryInfo.innerHTML = '';
 }
 
 
-{/* <p><img src="${flags.svg}" alt="${name.official}">${name.official}</p>
-<ul>
-  <li><b>Capital:</b><span>${capital}</span></li>
-  <li><b>Population:</b><span>${population}</span></li>
-  <li><b>Languages:</b><span>${languages}</span></li>
-</ul> */}
+// function onMurkupCountrieInfo(arrayCountries) {
+//     const {}
+//     const countrie = arrayCountries.map(oneCountrie => 
+//         refs.countryInfo.innerHTML = `<p class="country-name">
+//         <img src="${oneCountrie.flags.svg}" alt="${oneCountrie.name.official}" width="60" height="40">
+//         <span><b>${oneCountrie.name.official}</b></span></p>
+//         <ul class="country-ul">
+//           <li class="country-ul"><b>Capital:</b><span>${oneCountrie.capital}</span></li>
+//           <li class="country-ul"><b>Population:</b><span>${oneCountrie.population}</span></li>
+//           <li class="country-ul"><b>Languages:</b><span>${Object.values(oneCountrie.languages)}</span></li>
+//         </ul>`);
+
+// }

@@ -20,13 +20,32 @@ body {
 }
 .country-list{
 padding: 0;
+margin: 0px;
+
 }
-.country-li{
-display: flex;
-align-items: center;
+.countrys-li{
+  display: flex;
+  align-items: center;
 }
 
 .country-name{
-  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  margin: 0px;
   font-size: 20px;
+  padding: 0;
+
+}
+.country-info img{
+  margin-right: 30px;
+}
+.country-li{
+  margin-bottom: 10px;
+}
+.country-ul{
+  align-items: center;
+  padding: 0;
+}
+span {
+  margin-left: 10px;
 }
