@@ -8,8 +8,5 @@ export function fetchCountries(inputFilter) {
       return response.json();
     }
     ).then(data => data)
-
-//    peru   
-
 }
 
