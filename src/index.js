@@ -24,7 +24,9 @@ function onSearch(e) {
         inpitClear()
         return
     }
-    fetchCountries(inputFilter).then(onFilterCountries);
+    fetchCountries(inputFilter).then(onFilterCountries).catch(error => {
+        Notify.failure(`❌ Oops, there is no country with that name`)
+    });
 }
 
 function onFilterCountries(arrayCountries) {
@@ -39,7 +41,7 @@ function onFilterCountries(arrayCountries) {
     } else if (arrayCountries.length === 1) {
         onMurkupCountrieInfo(arrayCountries)
     } else{
-        Notify.failure(`❌ Oops, there is no country with that name`)
+        return
     }
 }
 
