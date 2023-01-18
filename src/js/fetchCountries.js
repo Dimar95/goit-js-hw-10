@@ -9,4 +9,3 @@ export function fetchCountries(inputFilter) {
     }
     ).then(data => data)
 }
-
