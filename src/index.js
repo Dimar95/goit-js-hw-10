@@ -40,16 +40,14 @@ function onFilterCountries(arrayCountries) {
         })
     } else if (arrayCountries.length === 1) {
         onMurkupCountrieInfo(arrayCountries)
-    } else{
-        return
-    }
-}
+    } else{return}
+};
 
 function onMurkupCountries({flags, name}) {
     refs.countryList.insertAdjacentHTML('beforeend', `<li class="countrys-li">
     <img src="${flags.svg}" alt="${name.official}" width="60" height="40">
     <span class="country-name">${name.official}</span></li>`)
-}
+};
 
 function onMurkupCountrieInfo(arrayCountries) {
     arrayCountries.map(({name, flags, capital, population, languages}) => 
@@ -59,9 +57,7 @@ function onMurkupCountrieInfo(arrayCountries) {
         <ul class="country-ul">
           <li class="country-ul"><b>Capital:</b><span>${capital}</span></li>
           <li class="country-ul"><b>Population:</b><span>${population}</span></li>
-          <li class="country-ul"><b>Languages:</b><span>${Object.values(languages)}</span></li>
-        </ul>`);
-
+          <li class="country-ul"><b>Languages:</b><span>${Object.values(languages)}</span></li></ul>`);
 }
 
 function inpitClear() {
